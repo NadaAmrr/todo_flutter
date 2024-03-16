@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:todo/models/task_model.dart';
 
 class TaskItemScreen extends StatelessWidget {
-  const TaskItemScreen({Key? key}) : super(key: key);
+  TaskModel model;
+  TaskItemScreen({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +50,8 @@ class TaskItemScreen extends StatelessWidget {
                   color: Colors.blueGrey,
                   borderRadius: BorderRadius.circular(25)),
             ),
-            title: Text("Task title"),
-            subtitle: Text("Task subtitle"),
+            title: Text(model.title),
+            subtitle: Text(model.description),
             trailing: Container(
               padding: EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(

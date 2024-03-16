@@ -1,5 +1,7 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/firebase_functions.dart';
+import 'package:todo/models/task_model.dart';
 import 'package:todo/screens/taskItem.dart';
 import 'package:todo/screens/taskItem_screen.dart';
 class TaskTab extends StatelessWidget {
@@ -42,10 +44,29 @@ class TaskTab extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: ListView.builder(itemBuilder: (context, index) {
-            return TaskItemScreen();
-          },
-          itemCount: 9,),
+          child:
+            FutureBuilder(
+              future: FirebaseFunctions.getTasks(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.hasError) {
+                  return Column(
+                    children: [
+                      Text("Something is wrong"),
+                      ElevatedButton(onPressed: () {}, child: Text('Try again'))
+                    ],
+                  );
+                }
+                List<TaskModel> tasksList = snapshot.data?.docs.map((doc) => doc.data()).toList() ?? [];
+                return
+                ListView.builder(itemBuilder: (context, index) {
+                  return TaskItemScreen(model: tasksList[index],);
+                },
+                itemCount: tasksList.length,);
+              },
+            )
         )
       ],
     );

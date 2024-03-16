@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:todo/firebase_functions.dart';
+import 'package:todo/models/task_model.dart';
 
 class AddTaskBottomSheet extends StatefulWidget {
   AddTaskBottomSheet({Key? key}) : super(key: key);
@@ -11,6 +13,8 @@ class AddTaskBottomSheet extends StatefulWidget {
 class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
   var formKey = GlobalKey<FormState>();
   var selectedDate = DateTime.now();
+  var descriptionController = TextEditingController();
+  var titleController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,6 +51,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 }
                 return null;
               },
+              controller: titleController,
               decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
@@ -70,6 +75,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 }
                 return null;
               },
+              controller: descriptionController,
               decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
@@ -109,6 +115,15 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       print("x");
+                      TaskModel task = TaskModel(
+                          title: titleController.text,
+                          description: descriptionController.text,
+                          date: selectedDate.microsecondsSinceEpoch);
+                      FirebaseFunctions.addTask(task).then((value) {
+                        Navigator.pop(context);
+                      }).catchError((e){
+                        print(e);
+                      });
                     }
                     print("y");
                   },
@@ -132,8 +147,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
   }
 
   selectDate(BuildContext context) async {
-    DateTime? chosenDate = await
-    showDatePicker(
+    DateTime? chosenDate = await showDatePicker(
         context: context,
         initialDate: selectedDate,
         firstDate: DateTime.now(),
