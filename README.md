@@ -1,16 +1,31 @@
-# todo_app
+# To-do Mobile Application
 
-To Do Application
+Welcome to the ToDo App! Keep track of your tasks with ease.
 
-## Getting Started
+## Features ✅
 
-This project is a starting point for a Flutter application.
+- **Add, Update, Delete, and Mark Tasks:** Stay organized with easy-to-use task management options.
+  
+## Implementation 🛠️
+  
+- **Dart & Flutter Widgets** 
+  
+- **Splash Screen**
 
-A few resources to get you started if this is your first Flutter project:
+- **SharedPreferences**
+    
+- **Firebase Database**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Provider**
+  
+- **Authentication**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Customization ⚙️
+
+- **Language Settings:** Choose between Arabic and English.
+  
+- **Mood Settings:** Switch between light and dark modes.
+
+## License 📝
+
+This project is licensed under the [MIT License](LICENSE).
