@@ -10,7 +10,7 @@ class AuthPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           bottom: TabBar(
@@ -30,7 +30,7 @@ class AuthPage extends StatelessWidget {
           title: Text(AppStrings.appName,
               style: Theme.of(context).textTheme.titleLarge),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
             RegisterTab(),
             LoginTab(),
