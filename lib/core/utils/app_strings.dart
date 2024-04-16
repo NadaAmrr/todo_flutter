@@ -1,6 +1,11 @@
 
 class AppStrings {
   static const String appName = "To Do List";
+  static const String login = "Login";
+  static const String register = "Register";
+  static const String email = "Email";
+  static const String pass = "Password";
+  static const String username = "Username";
   static const String addTask = "Add new task";
   static const String editTask = "Edit task";
   static const String saveTask = "Save Changes";
@@ -25,4 +30,8 @@ class AppStrings {
   static const String error = "Something went wrong!";
   static const String tryAgain = "Try again";
   static const String noTasks = "No tasks found";
+  static const String enter = "Please, enter your";
+  static const String fillInputs = "Please, Fill the inputs";
+  static const String weakPass = "The password provided is too weak.";
+  static const String alreadyExistEmail = "The account already exists for that email.";
 }
