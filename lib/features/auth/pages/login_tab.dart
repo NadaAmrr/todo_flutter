@@ -5,7 +5,6 @@ import 'package:todo_app/core/remote/firebase_functions.dart';
 import 'package:todo_app/core/utils/app_colors.dart';
 import 'package:todo_app/core/utils/app_images.dart';
 import 'package:todo_app/core/utils/app_strings.dart';
-import 'package:todo_app/core/widgets/custom_button.dart';
 import 'package:todo_app/core/widgets/custom_text_field.dart';
 import 'package:todo_app/features/home/presentation/pages/home_page.dart';
 
