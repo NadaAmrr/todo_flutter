@@ -52,7 +52,7 @@ class FirebaseFunctions {
   static Stream<QuerySnapshot<TaskModel>> getRealTimeTask(DateTime date) {
     var collection = getTasksCollection()
         .where("date",
-            isEqualTo: DateUtils.dateOnly(date).millisecondsSinceEpoch)
+        isEqualTo: DateUtils.dateOnly(date).millisecondsSinceEpoch)
         .snapshots();
     return collection;
   }
@@ -68,21 +68,21 @@ class FirebaseFunctions {
   /// Auth - signup
   static createAccount(
       {required String email,
-      required String username,
-      required String password,
-      required Function onSuccess,
-      required Function onError}) async {
+        required String username,
+        required String password,
+        required Function onSuccess,
+        required Function onError}) async {
     try {
       final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
       // credential.user!.sendEmailVerification();
       UserModel model = UserModel(
-        email: email,
-        username: username,
-        id: credential.user!.uid
+          email: email,
+          username: username,
+          id: credential.user!.uid
       );
       addUser(model);
       onSuccess();
@@ -96,9 +96,9 @@ class FirebaseFunctions {
   /// Auth - login
   static login(
       {email,
-      password,
-      required Function onSuccess,
-      required Function onError}) async {
+        password,
+        required Function onSuccess,
+        required Function onError}) async {
     try {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
