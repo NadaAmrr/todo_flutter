@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/core/remote/firebase_functions.dart';
@@ -39,16 +40,21 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
               ),
               CustomTextField(
                 controller: titleController,
-                hint: AppStrings.hintTitle,
-                label: AppStrings.title,
-                enterValue: AppStrings.enterTitle,
+                // hint: AppStrings.hintTitle,
+                // label: AppStrings.title,
+                // enterValue: AppStrings.enterTitle,
+                title: AppStrings.title, lines: 2, vertical: 20, horizontal: 0,
               ),
               CustomTextField(
                 controller: detailsController,
-                hint: AppStrings.hintDetails,
-                label: AppStrings.details,
-                enterValue: AppStrings.enterDetails,
+                title: AppStrings.details, lines: 2, vertical: 20, horizontal: 0,
               ),
+              // CustomTextField(
+              //   controller: detailsController,
+              //   hint: AppStrings.hintDetails,
+              //   label: AppStrings.details,
+              //   enterValue: AppStrings.enterDetails,
+              // ),
               Container(
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.symmetric(vertical: 12),
@@ -70,6 +76,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                       if (formKey.currentState!.validate()) {
                         TaskModel task = TaskModel(
                             title: titleController.text,
+                            userId: FirebaseAuth.instance.currentUser!.uid,
                             details: detailsController.text,
                             date: DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch);
                         FirebaseFunctions.addTask(task);

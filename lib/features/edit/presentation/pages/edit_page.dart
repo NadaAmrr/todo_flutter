@@ -59,12 +59,12 @@ class EditPage extends StatelessWidget {
                         ),
               
                         ///title
-                        CustomTextField(
-                            controller: titleController, hint: "Title", label: '', enterValue: '',),
-              
-                        ///details
-                        CustomTextField(
-                            controller: detailsController, hint: "Details", label: '', enterValue: '',),
+                        // CustomTextField(
+                        //     controller: titleController, hint: "Title", label: '', enterValue: '',),
+                        //
+                        // ///details
+                        // CustomTextField(
+                        //     controller: detailsController, hint: "Details", label: '', enterValue: '',),
               
                         ///Button
                         ElevatedButton(
