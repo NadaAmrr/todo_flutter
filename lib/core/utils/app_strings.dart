@@ -6,6 +6,7 @@ class AppStrings {
   static const String email = "Email";
   static const String pass = "Password";
   static const String username = "Username";
+  static const String welcome = "Welcome";
   static const String addTask = "Add new task";
   static const String editTask = "Edit task";
   static const String saveTask = "Save Changes";

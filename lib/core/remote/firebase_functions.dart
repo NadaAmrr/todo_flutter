@@ -34,6 +34,14 @@ class FirebaseFunctions {
     return await docRef.set(model);
   }
 
+  /// Get one User
+  static Future<UserModel?> readUser() async {
+    String id = FirebaseAuth.instance.currentUser!.uid;
+    var collection = getUsersCollection();
+    DocumentSnapshot<UserModel> snap = await collection.doc(id).get();
+    return snap.data();
+  }
+
   /// Add task
   static Future<void> addTask(TaskModel model) async {
     var collection = getTasksCollection();
@@ -51,6 +59,7 @@ class FirebaseFunctions {
   /// Get real time
   static Stream<QuerySnapshot<TaskModel>> getRealTimeTask(DateTime date) {
     var collection = getTasksCollection()
+    .where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .where("date",
         isEqualTo: DateUtils.dateOnly(date).millisecondsSinceEpoch)
         .snapshots();
@@ -87,6 +96,11 @@ class FirebaseFunctions {
       addUser(model);
       onSuccess();
     } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        onError('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        onError('The account already exists for that email.');
+      }
       onError(e.message);
     } catch (e) {
       onError(e.toString());
@@ -109,6 +123,11 @@ class FirebaseFunctions {
       // }
       onSuccess();
     } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        onError('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        onError('Wrong password provided for that user.');
+      }
       onError(e.message);
     } catch (e) {
       onError(e.toString());

@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/core/utils/app_colors.dart';
 import 'package:todo_app/core/utils/app_images.dart';
 import 'package:todo_app/core/utils/app_strings.dart';
+import 'package:todo_app/features/auth/manager/auth_provider.dart';
+import 'package:todo_app/features/auth/pages/auth_page.dart';
 import 'package:todo_app/features/tabs/settings/presentation/pages/settings_tab.dart';
 import 'package:todo_app/features/tabs/task/presentation/pages/task_tab.dart';
 import 'package:todo_app/features/tabs/task/presentation/widgets/bottom_sheet.dart';
@@ -21,12 +25,26 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AuthPageProvider?>(context);
     return Scaffold(
       extendBody: true,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-          title: Text(AppStrings.appName,
-              style: Theme.of(context).textTheme.titleLarge)),
+        title: Text('${AppStrings.welcome} ${provider?.userModel?.username ?? ""}!',
+            style: Theme.of(context).textTheme.titleLarge),
+        actions: [
+          IconButton(
+              onPressed: () {
+                provider?.logout();
+                Navigator.pushNamedAndRemoveUntil(
+                    context, AuthPage.routeName, (route) => false);
+              },
+              icon: Icon(
+                Icons.logout,
+                color: Theme.of(context).scaffoldBackgroundColor,
+              )),
+        ],
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -36,7 +54,8 @@ class _HomePageState extends State<HomePage> {
               isDismissible: false,
               builder: (context) {
                 return Container(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
                     child: AddTaskBottomSheet());
               });
         },

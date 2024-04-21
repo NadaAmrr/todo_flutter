@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/core/remote/firebase_functions.dart';
 import 'package:todo_app/core/utils/app_colors.dart';
 import 'package:todo_app/core/utils/app_images.dart';
 import 'package:todo_app/core/utils/app_strings.dart';
 import 'package:todo_app/core/widgets/custom_text_field.dart';
+import 'package:todo_app/features/auth/manager/auth_provider.dart';
 import 'package:todo_app/features/home/presentation/pages/home_page.dart';
 
 class LoginTab extends StatelessWidget {
@@ -16,6 +18,7 @@ class LoginTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AuthPageProvider>(context);
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
@@ -61,6 +64,7 @@ class LoginTab extends StatelessWidget {
                   if (_formKey.currentState!.validate()) {
                     // Navigate the user to the Home page
                     FirebaseFunctions.login(onSuccess: () {
+                      provider.initUser();
                       Navigator.pushNamedAndRemoveUntil(
                           context, HomePage.routeName, (route) => false);
                     }, onError: (errorMessage) {
