@@ -50,6 +50,13 @@ class FirebaseFunctions {
     return await docRef.set(model);
   }
 
+  /// Edit task
+  static Future<void> editTask(TaskModel model) async {
+    var collection = getTasksCollection();
+    var docRef = collection.doc(model.id);
+    return await docRef.update(model.toJson());
+  }
+
   /// Get one time
   static Future<QuerySnapshot<TaskModel>> getOneTimeTask() {
     var collection = getTasksCollection();
@@ -65,9 +72,6 @@ class FirebaseFunctions {
         .snapshots();
     return collection;
   }
-
-  /// Edit
-  static void editTask(String id) {}
 
   /// Delete
   static Future<void> deleteTask(String id) {

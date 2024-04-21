@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<AuthPageProvider>(context);
+    final provider = Provider.of<AuthPageProvider>(context);
     return ScreenUtilInit(
       designSize: const Size(412, 870),
       minTextAdapt: true,
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         initialRoute: provider.firebaseUser != null? HomePage.routeName : AuthPage.routeName,
         routes: {
           AuthPage.routeName: (context) => const AuthPage(),
-          HomePage.routeName: (context) => const HomePage(),
+          HomePage.routeName: (context) => HomePage(),
           EditPage.routeName: (context) => EditPage(),
         },
       ),

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -7,25 +6,20 @@ import 'package:todo_app/core/utils/app_images.dart';
 import 'package:todo_app/core/utils/app_strings.dart';
 import 'package:todo_app/features/auth/manager/auth_provider.dart';
 import 'package:todo_app/features/auth/pages/auth_page.dart';
+import 'package:todo_app/features/home/presentation/manager/home_provider.dart';
 import 'package:todo_app/features/tabs/settings/presentation/pages/settings_tab.dart';
 import 'package:todo_app/features/tabs/task/presentation/pages/task_tab.dart';
 import 'package:todo_app/features/tabs/task/presentation/widgets/bottom_sheet.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   static const String routeName = "home";
 
-  const HomePage({super.key});
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int index = 0;
 
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<AuthPageProvider?>(context);
+    var homeProvider = Provider.of<HomeProvider>(context);
     return Scaffold(
       extendBody: true,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -81,10 +75,9 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
           backgroundColor: Colors.transparent,
           selectedIconTheme: IconThemeData(color: AppColor.main),
-          currentIndex: index,
+          currentIndex: homeProvider?.index ?? 0,
           onTap: (value) {
-            index = value;
-            setState(() {});
+            homeProvider.changeIndex(value);
           },
           items: const [
             BottomNavigationBarItem(
@@ -96,7 +89,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: tabs[index],
+      body: tabs[homeProvider?.index ?? 0],
     );
   }
 
@@ -104,4 +97,5 @@ class _HomePageState extends State<HomePage> {
     TaskTab(),
     SettingsTab(),
   ];
+
 }
