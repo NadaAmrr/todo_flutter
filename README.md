@@ -66,18 +66,17 @@ Welcome to the ToDo App! Keep track of your tasks with ease.
 </svg>
 
 
-
 ## Features ✅
 
 - **Add, Update, Delete, and Mark Tasks:** Stay organized with easy-to-use task management options.
+
+## Vedio Screen
+
+https://github.com/NadaAmrr/todo_flutter/assets/115532651/6130cd0a-a272-4726-81da-f36e7258d356
   
 ## Implementation 🛠️
   
 - **Dart & Flutter Widgets** 
-  
-- **Splash Screen**
-
-- **SharedPreferences**
     
 - **Firebase Database**
 
