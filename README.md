@@ -94,3 +94,7 @@ Welcome to the ToDo App! Keep track of your tasks with ease.
 ## License 📝
 
 This project is licensed under the [MIT License](LICENSE).
+
+## Visitors Count
+
+<img align="left" style="background: blue;" src="https://profile-counter.glitch.me/todo_flutter/count.svg" alt="Loading">
