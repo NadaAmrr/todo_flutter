@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/app/my_app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:todo_app/features/auth/manager/auth_provider.dart';
+import 'package:todo_app/features/home/presentation/manager/home_provider.dart';
 import 'firebase_options.dart';
 
 // ...
@@ -14,6 +15,14 @@ void main() async {
   );
   // await FirebaseFirestore.instance.disableNetwork();
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (context) => AuthPageProvider())
+    ChangeNotifierProvider(create: (context) => AuthPageProvider()),
+    ChangeNotifierProvider(create: (context) => HomeProvider()),
   ], child: const MyApp()));
 }
+/**
+ *
+ *
+    runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (context) => AuthPageProvider())
+    ], child: const MyApp()));
+ */

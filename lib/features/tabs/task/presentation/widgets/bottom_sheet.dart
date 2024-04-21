@@ -16,13 +16,14 @@ class AddTaskBottomSheet extends StatefulWidget {
 
 class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
+  bool first = true;
   var selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     TextEditingController titleController = TextEditingController();
     TextEditingController detailsController = TextEditingController();
+
     return SingleChildScrollView(
       child: Container(
         color: Theme.of(context).bottomAppBarTheme.color,
@@ -40,21 +41,12 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
               ),
               CustomTextField(
                 controller: titleController,
-                // hint: AppStrings.hintTitle,
-                // label: AppStrings.title,
-                // enterValue: AppStrings.enterTitle,
                 title: AppStrings.title, lines: 2, vertical: 20, horizontal: 0,
               ),
               CustomTextField(
                 controller: detailsController,
                 title: AppStrings.details, lines: 2, vertical: 20, horizontal: 0,
               ),
-              // CustomTextField(
-              //   controller: detailsController,
-              //   hint: AppStrings.hintDetails,
-              //   label: AppStrings.details,
-              //   enterValue: AppStrings.enterDetails,
-              // ),
               Container(
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.symmetric(vertical: 12),

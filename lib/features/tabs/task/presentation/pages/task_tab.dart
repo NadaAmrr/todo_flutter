@@ -65,7 +65,8 @@ class _TaskTabState extends State<TaskTab> {
                 return Column(
                   children: [
                     Text(AppStrings.error, style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColor.red),),
-                    ElevatedButton(onPressed: () {}, child: Text(AppStrings.tryAgain, style: Theme.of(context).textTheme.bodyMedium,))
+                    ElevatedButton(onPressed: () {
+                    }, child: Text(AppStrings.tryAgain, style: Theme.of(context).textTheme.bodyMedium,))
                   ],
                 );
               }
