@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo_app/core/remote/firebase_functions.dart';
+import 'package:todo_app/models/task_model.dart';
 
 class TaskItemChild extends StatelessWidget {
-  String title;
-  String subTitle;
+  TaskModel model;
   Color color;
   Widget widget;
-  TaskItemChild({super.key, required this.title, required this.color, required this.subTitle, required this.widget});
+  TaskItemChild({super.key, required this.model, required this.color, required this.widget});
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +32,21 @@ class TaskItemChild extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(title, style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                Text(model.title, style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   color: color
                 ),),
                 const SizedBox(height: 5,),
-                Text(subTitle, style: Theme.of(context).textTheme.bodySmall),
+                Text(model.details, style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
           ),
           const Spacer(),
-          widget,
+          InkWell(
+              onTap: () {
+                model.isDone = !(model.isDone ?? false);
+                FirebaseFunctions.editTask(model);
+              },
+              child: widget),
         ],
       ),
     );

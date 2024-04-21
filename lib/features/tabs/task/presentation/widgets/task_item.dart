@@ -32,7 +32,7 @@ class TaskItem extends StatelessWidget {
         startActionPane: ActionPane(motion: const DrawerMotion(), children: [
           SlidableAction(
               onPressed: (context) {
-                FirebaseFunctions.editTask(model);
+                // FirebaseFunctions.editTask(model);
                 // model.isDone = !(model.isDone ?? false);
                 Navigator.pushNamed(context, EditPage.routeName, arguments: model);
               },
@@ -56,14 +56,13 @@ class TaskItem extends StatelessWidget {
                 bottomRight: Radius.circular(15),
               )),
           child: InkWell(
-              onTap: () {
-                model.isDone = !(model.isDone ?? false);
-                FirebaseFunctions.editTask(model);
-              },
+              // onTap: () {
+              //   model.isDone = !(model.isDone ?? false);
+              //   FirebaseFunctions.editTask(model);
+              // },
               child: TaskItemChild(
-                title: model.title,
+                model: model,
                 color: color,
-                subTitle: model.details,
                 widget: widget,
               )),
         ),
